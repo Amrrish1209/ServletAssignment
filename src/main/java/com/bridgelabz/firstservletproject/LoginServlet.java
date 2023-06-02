@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(description = "Login Servlet Testing", urlPatterns = { "/LoginServlet" }, initParams = {
-		@WebInitParam(name = "user", value = "Amrrish"), @WebInitParam(name = "password", value = "Roshan") })
+		@WebInitParam(name = "user", value = "Amrrish"), @WebInitParam(name = "password", value = "Pavilion@1209") })
 public class LoginServlet extends HttpServlet {
 
 	@Override
@@ -29,7 +29,10 @@ public class LoginServlet extends HttpServlet {
 		// Validate the username
 		boolean isUsernameValid = isValidUsername(username);
 
-		if (isUsernameValid && userID.equals(username) && userPassword.equals(password)) {
+		// Validate the password
+		boolean isPasswordValid = isValidPassword(password);
+
+		if (isUsernameValid && isPasswordValid && userID.equals(username) && userPassword.equals(password)) {
 			request.setAttribute("user", username);
 			request.getRequestDispatcher("LoginSuccess.jsp").forward(request, response);
 		} else {
@@ -38,6 +41,9 @@ public class LoginServlet extends HttpServlet {
 			if (!isUsernameValid) {
 				out.println(
 						"<font color=red>Invalid username. Name should start with a capital letter and have a minimum of 3 characters.<font>");
+			} else if (!isPasswordValid) {
+				out.println(
+						"<font color=red>Invalid password. Password should have a minimum of 8 characters, at least 1 uppercase letter, 1 numeric digit, and exactly 1 special character.<font>");
 			} else {
 				out.println("<font color=red>Incorrect username or password.<font>");
 			}
@@ -51,5 +57,11 @@ public class LoginServlet extends HttpServlet {
 			return true;
 		}
 		return false;
+	}
+
+	// Method to validate the password
+	private boolean isValidPassword(String password) {
+		String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+		return password.matches(passwordRegex);
 	}
 }
