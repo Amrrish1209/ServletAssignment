@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+<style>
+	body{
+		margin:0;
+		padding:0;
+		
+	}
+	form{
+		width:50%;
+		display:flex;
+		flex-direction:column;
+		text-align:center;
+		align-item:center;
+		margin:80px auto 0;
+		border:1px solid #bbb;
+		border-width:50px;
+		border-radius:20px;
+		padding-top:40px;
+		padding-bottom:40px;
+	}
+	label{
+		font-size:20px;
+		font-weight:bold;
+		margin-bottom:10px;
+	}
+	input{
+		margin:0 auto;
+		text-align:center;
+	}
+	.submit{
+		margin-top:20px;
+		font-size:20px;
+		padding:15px 25px;
+		border-radius:50%;
+		font-weight:bold;
+		cursor:pointer;
+	}
+</style>
+</head>
+<body>
+	<form action="LoginServlet" method="post">
+		<label>Username:</label> <input type="text" name="user">
+		<br>
+		<label>Password:</label> <input type="password" name="pwd">
+		<br>
+		<input class="submit" type="submit" value="Login">
+	</form>
+</body>
+</html>
